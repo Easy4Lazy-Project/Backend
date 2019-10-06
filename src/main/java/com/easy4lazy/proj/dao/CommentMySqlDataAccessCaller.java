@@ -1,6 +1,8 @@
 package com.easy4lazy.proj.dao;
 
 import com.easy4lazy.proj.model.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +12,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("mysql")
 public class CommentMySqlDataAccessCaller implements CommentDao {
-    
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public CommentMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public String postComment(int userId, String token, Comment comment) {
         return null;

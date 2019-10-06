@@ -1,6 +1,8 @@
 package com.easy4lazy.proj.dao;
 
 import com.easy4lazy.proj.model.Question;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,6 +12,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository("mysql")
 public class QuestionMySqlDataAccessCaller implements QuestionDao {
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public QuestionMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
     @Override
     public String postQuestion(int userId, String token, Question question) {
         return null;

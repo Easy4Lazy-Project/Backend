@@ -1,5 +1,7 @@
 package com.easy4lazy.proj.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,6 +11,13 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("mysql")
 public class VoteMySqlDataAccessCaller implements VoteDao {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public VoteMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
     @Override
     public int voteQuestionUp(int contentId, int userId, String tokens) {
         return 0;

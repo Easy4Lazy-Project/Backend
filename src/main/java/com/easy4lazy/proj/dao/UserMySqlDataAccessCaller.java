@@ -1,6 +1,8 @@
 package com.easy4lazy.proj.dao;
 
 import com.easy4lazy.proj.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Repository("mysql")
 public class UserMySqlDataAccessCaller implements UserDao {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UserMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 //    @Override
 //    public String signUp(String name, String email, String pwd) {
 //        return null;
