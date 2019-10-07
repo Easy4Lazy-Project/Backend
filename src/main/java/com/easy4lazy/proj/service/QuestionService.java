@@ -14,8 +14,8 @@ public class QuestionService {
         this.questionDao = questionDao;
     }
 
-    public String postQuestion(int userId, String token, Question question){
-        return questionDao.postQuestion(userId, token, question);
+    public String postQuestion(int userId, String token, String question, String subject, String tags){
+        return questionDao.postQuestion(userId, token, question, subject, tags);
     }
 
     public String getQuestion(int questionId){
@@ -30,8 +30,8 @@ public class QuestionService {
         return questionDao.deleteQuestion(userId, token, contentId);
     }
 
-    public String editQuestion(int userId, String token, Question question){
-        return questionDao.editQuestion(userId, token, question);
+    public String editQuestion(int userId, String token, String question, String subject, String tags){
+        return questionDao.postQuestion(userId, token, question, subject, tags);
     }
 
     public int getTotalAnswersCount(){

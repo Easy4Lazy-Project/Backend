@@ -18,13 +18,20 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
     public QuestionMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    //TODO: implements this
     @Override
-    public String postQuestion(int userId, String token, Question question) {
+    public String postQuestion(int userId, String token, String question, String subject, String tags) {
         return null;
     }
 
+    //TODO implements this
     @Override
     public String getQuestion(int questionId) {
+         //return the question,
+        //              comments,
+                    //answers
+                        //comments
         return null;
     }
 
@@ -39,9 +46,10 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
     }
 
     @Override
-    public String editQuestion(int userId, String token, Question question) {
+    public String editQuestion(int userId, String token, String question, String subject, String tags) {
         return null;
     }
+
 
     @Override
     public int getTotalQuestionsCount() {

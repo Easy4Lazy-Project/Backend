@@ -6,12 +6,16 @@ import com.easy4lazy.proj.model.Question;
 
 public interface QuestionDao {
     /**
-     * post a question to the db
-     * @param question, userId, token CHECK: if user is logged in
-     * @return {questionId:int, message:String} a json object
-     *  questionId  : id of the content in the content table
+     * user post HIS/HER OWN question
+     * @param userId
+     * @param token //for isUserLoggedIn
+     * @param question //id of the comment
+     * @param subject
+     * @param tags
+     * @return { true/false, message}
      */
-    String postQuestion(int userId, String token, Question question);
+    String postQuestion(int userId, String token, String question,String subject, String tags);
+
 
     /**
      *  return the question with the id
@@ -46,9 +50,11 @@ public interface QuestionDao {
      * @param userId
      * @param token //for isUserLoggedIn
      * @param question //id of the comment
+     * @param subject
+     * @param tags
      * @return { true/false, message}
      */
-    String editQuestion(int userId, String token, Question question);
+    String editQuestion(int userId, String token, String question,String subject, String tags);
 
     /**
      *

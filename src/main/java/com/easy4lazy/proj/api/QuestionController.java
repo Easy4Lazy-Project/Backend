@@ -17,9 +17,14 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
-    @PostMapping(path="/post/{id}/{token}")
-    public String postQuestion(@PathVariable("id") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("token") @Valid @NotNull @RequestBody Question question){
-        return questionService.postQuestion(userId, token, question);
+    @PostMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
+    public String postQuestion(@PathVariable("uid") @Valid @NotNull int userId,
+                               @PathVariable("token") @Valid @NotNull String token,
+                               @PathVariable("ques") @Valid @NotNull String question,
+                               @PathVariable("subject") String subject,
+                               @PathVariable("tags") String tags
+    ){
+        return questionService.postQuestion(userId, token, question, subject, tags);
     }
 
     @GetMapping(path="/get/{id}")
@@ -38,9 +43,13 @@ public class QuestionController {
     }
 
 
-    @PutMapping(path="/post/{id}/{token}")
-    String editQuestion(@PathVariable("id") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("token") @Valid @NotNull @RequestBody Question question){
-        return questionService.editQuestion(userId, token, question);
+    @PutMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
+    public String editQuestion(@PathVariable("uid") @Valid @NotNull int userId,
+                               @PathVariable("token") @Valid @NotNull String token,
+                               @PathVariable("ques") @Valid @NotNull String question,
+                               @PathVariable("subject") String subject,
+                               @PathVariable("tags") String tags){
+        return questionService.editQuestion(userId, token, question, subject, tags);
     }
 
     @GetMapping()
