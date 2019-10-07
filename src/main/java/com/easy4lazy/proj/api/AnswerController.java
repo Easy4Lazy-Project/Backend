@@ -16,18 +16,24 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
-    @PostMapping(path="/post/{id}/{token}")
-    public String postAnswer(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @Valid @NotNull @RequestBody Answer ans){
-        return answerService.postAnswer(userId, token, ans);
+    @PostMapping(path="{uid}/{token}/{qid}/{ans}")
+    public String postAnswer(@PathVariable("uid") @Valid @NotNull int userId,
+                             @PathVariable("token") @Valid @NotNull String token,
+                             @PathVariable("qid") @Valid @NotNull int questionId,
+                             @PathVariable("ans") @Valid @NotNull String ans){
+        return answerService.postAnswer(userId, token, questionId, ans);
     }
 
 
-    @PutMapping(path="/post/{id}/{token}")
-    public String editAnswer(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @Valid @NotNull @RequestBody Answer answer){
-        return answerService.editAnswer(userId, token, answer);
+    @PutMapping(path="{uid}/{token}/{qid}/{ans}")
+    public String editAnswer(@PathVariable("uid") @Valid @NotNull int userId,
+                             @PathVariable("token") @Valid @NotNull String token,
+                             @PathVariable("qid") @Valid @NotNull int questionId,
+                             @PathVariable("ans") @Valid @NotNull String ans){
+        return answerService.editAnswer(userId, token, questionId, ans);
     }
 
-
+   /**  this functionalities is disabled for now   *****
     @DeleteMapping(path="/del/{uid}/{token}/{id}")
     public String deleteAnswer(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
         return answerService.deleteAnswer(userId, token, contentId);
@@ -38,7 +44,10 @@ public class AnswerController {
     public String getQuestionAnswers(@PathVariable("id") @Valid @NotNull int userId, @PathVariable("id") @Valid @NotNull int questionId){
         return answerService.getQuestionAnswers(userId, questionId);
     }
-    @GetMapping(path="/count")
+
+    ****/
+
+    @GetMapping(path="/count")          // we need this for our dashboard
     public int getTotalAnswersCount(){
         return answerService.getTotalAnswersCount();
     }

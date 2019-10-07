@@ -15,12 +15,12 @@ public class AnswerService {
         this.answerDao = answerDao;
     }
 
-    public String postAnswer(int userId, String token, Answer ans){
-        return answerDao.postAnswer(userId, token, ans);
+    public String postAnswer(int userId, String token, int qid, String ans){
+        return answerDao.postAnswer(userId, token, qid, ans);
     }
 
-    public String editAnswer(int userId, String token, Answer answer){
-        return answerDao.editAnswer(userId, token, answer);
+    public String editAnswer(int userId, String token, int qid, String ans){
+        return answerDao.editAnswer(userId, token, qid, ans);
     }
 
     public String deleteAnswer(int userId, String token, int contentId){

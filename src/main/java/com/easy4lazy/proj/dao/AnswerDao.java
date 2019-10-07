@@ -9,22 +9,23 @@ public interface AnswerDao {
 
     /**
      * post a answer to the db
-     * @param ans, userId, token CHECK: if user is logged in
+     * @param ans, userId, token, questionId     CHECK: if user is logged in
      * @return {answerId:int, message:String} a json object
      *  answerId  : id of the content in the content table
      *
      *  ALSO, update answerCount of the question
      */
-    String postAnswer(int userId, String token, Answer ans);
+    String postAnswer(int userId, String token, int questionId, String ans);
 
     /**
      * user edit HIS/HER OWN answer
      * @param userId
      * @param token //for isUserLoggedIn
-     * @param answer //id of the comment
+     * @param questionId
+     * @param ans //id of the comment
      * @return { true/false, message}
      */
-    String editAnswer(int userId, String token, Answer answer);
+    String editAnswer(int userId, String token, int questionId, String ans);
 
     /**
      * user delete HIS/HER OWN answer

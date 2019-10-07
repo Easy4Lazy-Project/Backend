@@ -18,13 +18,16 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
     public AnswerMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    //TODO:  implement this
     @Override
-    public String postAnswer(int userId, String token, Answer ans) {
+    public String postAnswer(int userId, String token, int questionId, String ans) {
         return null;
     }
 
+    //TODO: implement
     @Override
-    public String editAnswer(int userId, String token, Answer answer) {
+    public String editAnswer(int userId, String token, int questionId, String ans) {
         return null;
     }
 
@@ -38,6 +41,7 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
         return null;
     }
 
+    // TODO: implement this
     @Override
     public int getTotalAnswersCount() {
         return 0;
