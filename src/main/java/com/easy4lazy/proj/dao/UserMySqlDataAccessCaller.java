@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Purpose: class that interact with the mysql database
  * THIS IS WHERE YOUR ASSIGNMENT IS. DO NOT THE CODE STRUCTURE. JUST IMPLEMENTS THE METHODS
  */
-@Repository("mysql")
+@Repository("userMysql")
 public class UserMySqlDataAccessCaller implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;

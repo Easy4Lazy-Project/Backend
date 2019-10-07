@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * THIS IS WHERE YOUR ASSIGNMENT IS. DO NOT THE CODE STRUCTURE. JUST IMPLEMENTS THE METHODS
  * CHECK THE CommentDao interface for more info
  */
-@Repository("mysql")
+@Repository("commentMysql")
 public class CommentMySqlDataAccessCaller implements CommentDao {
 
     private final JdbcTemplate jdbcTemplate;

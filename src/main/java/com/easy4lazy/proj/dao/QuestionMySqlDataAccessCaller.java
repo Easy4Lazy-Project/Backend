@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * THIS IS WHERE YOUR ASSIGNMENT IS. DO NOT THE CODE STRUCTURE. JUST IMPLEMENTS THE METHODS
  */
 
-@Repository("mysql")
+@Repository("questionMysql")
 public class QuestionMySqlDataAccessCaller implements QuestionDao {
     private final JdbcTemplate jdbcTemplate;
 

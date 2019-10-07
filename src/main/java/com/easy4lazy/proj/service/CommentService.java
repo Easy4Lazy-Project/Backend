@@ -3,6 +3,7 @@ package com.easy4lazy.proj.service;
 import com.easy4lazy.proj.dao.CommentDao;
 import com.easy4lazy.proj.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,7 +11,7 @@ public class CommentService {
     private final CommentDao commentDao;
 
     @Autowired
-    public CommentService(CommentDao contentDao) {
+    public CommentService(@Qualifier("commentMysql") CommentDao contentDao) {
         this.commentDao = contentDao;
     }
 

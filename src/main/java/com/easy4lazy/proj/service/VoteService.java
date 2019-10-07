@@ -2,6 +2,7 @@ package com.easy4lazy.proj.service;
 
 import com.easy4lazy.proj.dao.VoteDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +10,7 @@ public class VoteService {
     private final VoteDao voteDao;
 
     @Autowired
-    public VoteService(VoteDao voteDao) {
+    public VoteService(@Qualifier("voteMysql") VoteDao voteDao) {
         this.voteDao = voteDao;
     }
 

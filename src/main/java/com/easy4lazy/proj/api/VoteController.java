@@ -50,7 +50,7 @@ public class VoteController {
         return voteService.getTotalAnswerVoteUp();
     }
 
-    @GetMapping(path="/tavp")
+    @GetMapping(path="/tavd")
     public int getTotalAnswerVoteDown(){
         return voteService.getTotalAnswerVoteDown();
     }

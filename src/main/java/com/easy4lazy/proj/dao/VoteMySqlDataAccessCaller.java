@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * THIS IS WHERE YOUR ASSIGNMENT IS. DO NOT THE CODE STRUCTURE. JUST IMPLEMENTS THE METHODS
  * CHECK THE VoteDao interface for more info
  */
-@Repository("mysql")
+@Repository("voteMysql")
 public class VoteMySqlDataAccessCaller implements VoteDao {
 
     private final JdbcTemplate jdbcTemplate;

@@ -2,6 +2,7 @@ package com.easy4lazy.proj.service;
 
 import com.easy4lazy.proj.dao.AnswerDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +10,7 @@ public class AnswerService {
     private final AnswerDao answerDao;
 
     @Autowired
-    public AnswerService(AnswerDao answerDao) {
+    public AnswerService(@Qualifier("answerMysql") AnswerDao answerDao) {
         this.answerDao = answerDao;
     }
 

@@ -12,7 +12,7 @@ public class UserService {
     private final UserDao userDao;
 
     @Autowired
-    public UserService(@Qualifier("mysql") UserDao userDao) {
+    public UserService(@Qualifier("userMysql") UserDao userDao) {
         this.userDao = userDao;
     }
 

@@ -32,7 +32,7 @@ public class QuestionController {
         return questionService.getQuestion(questionId);
     }
 
-    @GetMapping()
+    @GetMapping(path="/all")
     public String getAllQuestions(){
         return questionService.getAllQuestions();
     }
@@ -52,7 +52,7 @@ public class QuestionController {
         return questionService.editQuestion(userId, token, question, subject, tags);
     }
 
-    @GetMapping()
+    @GetMapping(path="/count")
     public int getTotalQuestionsCount(){
         return questionService.getTotalAnswersCount();
     }
