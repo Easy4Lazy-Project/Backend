@@ -14,8 +14,8 @@ public class CommentService {
         this.commentDao = contentDao;
     }
 
-    public String postComment(int userId, String token, Comment comment){
-        return commentDao.postComment(userId, token, comment);
+    public String postComment(int userId, String token, int contentId, String comment){
+        return commentDao.postComment(userId, token, contentId, comment);
     }
 
 

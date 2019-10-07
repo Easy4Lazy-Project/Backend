@@ -8,13 +8,13 @@ public interface CommentDao {
 
     /**
      * post a comment to the db
-     * @param comment, userId, token CHECK: if user is logged in
+     * @param comment, userId, token, contentId CHECK: if user is logged in
      * @return {commentId:int, message:String} a json object
      *  commentId  : id of the content in the content table
      *
      *  ALSO, update commentCount of the question
      */
-    String postComment(int userId, String token, Comment comment);
+    String postComment(int userId, String token, int contentId, String comment);
 
 
     /**

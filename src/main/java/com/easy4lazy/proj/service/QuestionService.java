@@ -1,6 +1,5 @@
 package com.easy4lazy.proj.service;
 
-import com.easy4lazy.proj.dao.ContentDao;
 import com.easy4lazy.proj.dao.QuestionDao;
 import com.easy4lazy.proj.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;

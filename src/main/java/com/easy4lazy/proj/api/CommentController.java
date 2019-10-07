@@ -16,11 +16,15 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping(path="/post/{id}/{token}")
-    public String postComment(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @Valid @NotNull @RequestBody Comment comment){
-        return commentService.postComment(userId, token, comment);
+    @PostMapping(path="{uid}/{token}/{contentId}/{comment}")
+    public String postComment(@PathVariable("uid") @Valid @NotNull int userId,
+                              @PathVariable("token") @Valid @NotNull String token,
+                              @PathVariable("contentId") @Valid @NotNull int contentId,
+                              @Valid @NotNull @PathVariable String comment){
+        return commentService.postComment(userId, token, contentId, comment);
     }
 
+    /**** features disabled for v0.1.0   *****
     @GetMapping(path="/get/{uid}/{id}")
     public String getQuestionComments(@PathVariable("uid") int userId, @PathVariable("id") @Valid @NotNull int questionId){
         return commentService.getQuestionComments(userId, questionId);
@@ -35,6 +39,9 @@ public class CommentController {
     public String deleteComment(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
         return commentService.deleteComment(userId, token, contentId);
     }
+
+     *****/
+
 
     @GetMapping(path="/count")
     public int getTotalCommentsCount(){

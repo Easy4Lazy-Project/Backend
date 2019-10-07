@@ -20,8 +20,9 @@ public class CommentMySqlDataAccessCaller implements CommentDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    //TODO implement this
     @Override
-    public String postComment(int userId, String token, Comment comment) {
+    public String postComment(int userId, String token, int contentId, String comment) {
         return null;
     }
 
