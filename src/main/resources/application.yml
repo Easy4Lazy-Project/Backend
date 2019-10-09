@@ -1,6 +1,0 @@
-app:
-  datasource:
-    jdbc-url: jdbc:mysql://localhost:8080/easylazy_db
-    username: root
-    password: mypwd
-    pool-size: 30

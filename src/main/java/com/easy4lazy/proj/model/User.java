@@ -32,10 +32,10 @@ public class User {
      * @param id
      * @param token
      */
-    public User(@JsonProperty("userId") int id, @JsonProperty("token") String token) {
-        this.id = id;
-        this.token = token;
-    }
+//    public User(@JsonProperty("userId") int id, @JsonProperty("token") String token) {
+//        this.id = id;
+//        this.token = token;
+//    }
 
     public int getId() {
         return id;
