@@ -1,1 +1,3 @@
 rootProject.name = 'proj'
+//for docker
+enableFeaturePreview('IMPROVED_POM_SUPPORT')

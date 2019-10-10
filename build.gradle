@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.1.9.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+    //for docker
+    id 'com.gradle.build-scan' version '2.0.2'
 }
 
 group = 'com.easy4lazy'
@@ -31,4 +33,30 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
+	//for docker
+	implementation 'org.springframework.boot:spring-boot-dependencies:2.0.5.RELEASE'
+	components {
+		withModule('org.springframework:spring-beans') {
+			allVariants {
+				withDependencyConstraints {
+					// Need to patch constraints because snakeyaml is an optional dependency
+					it.findAll { it.name == 'snakeyaml' }.each { it.version { strictly '1.19' } }
+				}
+			}
+		}
+	}
 }
+buildScan {
+
+	// always accept the terms of service
+	termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+	termsOfServiceAgree = 'yes'
+
+	// always publish a build scan
+	publishAlways()
+}
+bootJar {
+	mainClassName = 'com.easy4lazy.proj.ProjApplication'
+}
+
+
