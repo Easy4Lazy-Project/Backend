@@ -2,20 +2,27 @@ package com.easy4lazy.proj.api;
 
 import com.easy4lazy.proj.model.Answer;
 import com.easy4lazy.proj.service.AnswerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-@RequestMapping("api/v1/post/a")
-@RestController
-public class AnswerController {
-    private final AnswerService answerService;
 
+@RestController
+@RequestMapping("api/v1/post/a")
+@Api(value = "AnswerController Resource" )
+public class AnswerController {
+
+    private final AnswerService answerService;
     public AnswerController(AnswerService answerService) {
         this.answerService = answerService;
     }
 
+    @ApiOperation(value = "postAnswer World")
     @PostMapping(path="{uid}/{token}/{qid}/{ans}")
     public String postAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
@@ -24,7 +31,7 @@ public class AnswerController {
         return answerService.postAnswer(userId, token, questionId, ans);
     }
 
-
+    @ApiOperation(value = "Edit Answer Success")
     @PutMapping(path="{uid}/{token}/{qid}/{ans}")
     public String editAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
@@ -46,7 +53,13 @@ public class AnswerController {
     }
 
     ****/
-
+   @ApiOperation(value = "Returns answer count")
+   @ApiResponses(
+           value = {
+                   @ApiResponse(code = 100, message = "100 is the message"),
+                   @ApiResponse(code = 200, message = "Successful count Answer")
+           }
+   )
     @GetMapping(path="/count")          // we need this for our dashboard
     public int getTotalAnswersCount(){
         return answerService.getTotalAnswersCount();
