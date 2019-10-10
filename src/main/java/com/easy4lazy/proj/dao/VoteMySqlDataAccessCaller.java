@@ -55,6 +55,8 @@ public class VoteMySqlDataAccessCaller implements VoteDao {
 
     @Override
     public int getTotalAnswerVoteDown() {
-        return 0;
+        final String sql = "SELECT COUNT(*) FROM vote WHERE votetype_id=2 and content_id IN (SELECT content_id FROM content WHERE contenttype_id=2)";
+        return jdbcTemplate.queryForObject(sql, null, Integer.class );
+        //return 0;
     }
 }
