@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("api/v1/post/a")
-@Api(value = "AnswerController Resource" )
+@Api(value = ": Answer Controller Resource" )
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -22,7 +22,7 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
-    @ApiOperation(value = "postAnswer World")
+    @ApiOperation(value = " : post Answer Success")
     @PostMapping(path="{uid}/{token}/{qid}/{ans}")
     public String postAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
@@ -31,7 +31,7 @@ public class AnswerController {
         return answerService.postAnswer(userId, token, questionId, ans);
     }
 
-    @ApiOperation(value = "Edit Answer Success")
+    @ApiOperation(value = " : Edit Answer Success")
     @PutMapping(path="{uid}/{token}/{qid}/{ans}")
     public String editAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
@@ -53,7 +53,7 @@ public class AnswerController {
     }
 
     ****/
-   @ApiOperation(value = "Returns answer count")
+   @ApiOperation(value = " : Returns answer count")
    @ApiResponses(
            value = {
                    @ApiResponse(code = 100, message = "100 is the message"),
