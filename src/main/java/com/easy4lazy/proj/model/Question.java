@@ -1,17 +1,23 @@
 package com.easy4lazy.proj.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class Question extends Content {
 
-    @NotNull @NotBlank
+
     String subject;
-    @NotNull  @NotBlank
+    String body;
     String tags;
     int commentCount;
 
-
+    public Question(@JsonProperty("subject") String subject, @JsonProperty("tags") String tags, @JsonProperty("body") String body) {
+        this.subject = subject;
+        this.tags = tags;
+        this.body = body;
+    }
 
     final int contentType_id = 1;
 
