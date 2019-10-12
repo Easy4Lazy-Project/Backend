@@ -117,9 +117,10 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
 
     @Override
     public String getTopTenVotedQuestions() {
-        final String sql = "SELECT content_id as qid, Count(*) as count " +
-                "FROM vote " +
-                "WHERE content_id IN (SELECT id FROM content WHERE contenttype_id=1) " +
+        final String sql = "SELECT v.content_id as qid, c.subject, c.body,c.user_id,  Count(*) as count " +
+                "FROM vote v " +
+                " INNER JOIN content c ON v.content_id=c.id " +
+                "WHERE v.content_id IN (SELECT id FROM content WHERE c.contenttype_id=1) " +
                 "GROUP BY qid " +
                 "ORDER BY count desc " +
                 "LIMIT 10";
