@@ -22,10 +22,10 @@ public class QuestionController {
         this.questionService = questionService;
     }
     @ApiOperation(value = " : post Question Successful")
-    @PostMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
+    @PostMapping(path="{uid}/{token}/{question}/{subject}/{tags}")
     public String postQuestion(@PathVariable("uid") @Valid @NotNull int userId,
                                @PathVariable("token") @Valid @NotNull String token,
-                               @PathVariable("ques") @Valid @NotNull String question,
+                               @PathVariable("question") @Valid @NotNull String question,
                                @PathVariable("subject") String subject,
                                @PathVariable("tags") String tags
     ){
@@ -61,10 +61,10 @@ public class QuestionController {
     }
 
     @ApiOperation(value = " : edit Question")
-    @PutMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
+    @PutMapping(path="{uid}/{token}/{question}/{subject}/{tags}")
     public String editQuestion(@PathVariable("uid") @Valid @NotNull int userId,
                                @PathVariable("token") @Valid @NotNull String token,
-                               @PathVariable("ques") @Valid @NotNull String question,
+                               @PathVariable("question") @Valid @NotNull String question,
                                @PathVariable("subject") String subject,
                                @PathVariable("tags") String tags){
         return questionService.editQuestion(userId, token, question, subject, tags);
@@ -75,11 +75,9 @@ public class QuestionController {
             value = {
                     @ApiResponse(code = 100, message = "100 is the message"),
                     @ApiResponse(code = 200, message = "Successful Returns  Total Questions Count")
-            }
-    )
+            })
     @GetMapping(path="/count")
-    public int getTotalQuestionsCount(){
-        return questionService.getTotalAnswersCount();
+    public int getTotalQuestionsCount(){ return questionService.getTotalAnswersCount();
     }
 
 

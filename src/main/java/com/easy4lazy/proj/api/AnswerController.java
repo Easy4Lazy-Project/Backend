@@ -23,20 +23,20 @@ public class AnswerController {
     }
 
     @ApiOperation(value = " : post Answer Success")
-    @PostMapping(path="{uid}/{token}/{qid}/{ans}")
+    @PostMapping(path="{uid}/{token}/{qid}/{Answer}")
     public String postAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
                              @PathVariable("qid") @Valid @NotNull int questionId,
-                             @PathVariable("ans") @Valid @NotNull String ans){
+                             @PathVariable("Answer") @Valid @NotNull String ans){
         return answerService.postAnswer(userId, token, questionId, ans);
     }
 
     @ApiOperation(value = " : Edit Answer Success")
-    @PutMapping(path="{uid}/{token}/{qid}/{ans}")
+    @PutMapping(path="{uid}/{token}/{qid}/{Answer}")
     public String editAnswer(@PathVariable("uid") @Valid @NotNull int userId,
                              @PathVariable("token") @Valid @NotNull String token,
                              @PathVariable("qid") @Valid @NotNull int questionId,
-                             @PathVariable("ans") @Valid @NotNull String ans){
+                             @PathVariable("Answer") @Valid @NotNull String ans){
         return answerService.editAnswer(userId, token, questionId, ans);
     }
 

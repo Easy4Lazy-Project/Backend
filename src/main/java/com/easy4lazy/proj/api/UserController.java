@@ -30,9 +30,9 @@ public class UserController {
     }
 
     @ApiOperation(value = " : login Successful")
-    @PostMapping(path="/login/{email}/{pwd}")
-    public String login(@PathVariable("email") @Valid @NonNull  String email, @PathVariable("pwd") @Valid @NonNull String pwd) {
-        return  userService.login(email,pwd);
+    @PostMapping(path="/login/{email}/{password}")
+    public String login(@PathVariable("email") @Valid @NonNull  String email, @PathVariable("password") @Valid @NonNull String password) {
+        return  userService.login(email,password);
     }
     @ApiOperation(value = " : log out Successful")
     @ApiResponses(
