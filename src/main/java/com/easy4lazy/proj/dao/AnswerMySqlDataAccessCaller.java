@@ -1,6 +1,7 @@
 package com.easy4lazy.proj.dao;
 
 import com.easy4lazy.proj.model.Answer;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Purpose: class that interact with the mysql database
@@ -80,12 +83,17 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
     // TODO: implement this
     @Override
     public int getTotalAnswersCount() {
-        final String sql = "SELECT COUNT(*) FROM content where contenttype_id=2";
+        final String sql = "SELECT COUNT(*) FROM content where contenttype_id=2 ";
         return jdbcTemplate.queryForObject(sql, null, Integer.class );
     }
 
     @Override
     public String getAnswersPerMonth(int year) {
-        return null;
+        final String sql = "SELECT MONTH(creationDate) as month, Count(*) as count " +
+                "FROM content " +
+                "WHERE YEAR(creationDate) = ?  AND contenttype_id=2 " +
+                "GROUP BY month";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new Object[]{year});
+        return new Gson().toJson(result);   //convert the list to json
     }
 }

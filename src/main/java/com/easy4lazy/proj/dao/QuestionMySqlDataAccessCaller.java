@@ -107,11 +107,23 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
 
     @Override
     public String getQuestionsPerMonth(int year) {
-        return null;
+        final String sql = "SELECT MONTH(creationDate) as month, Count(*) as count " +
+                "FROM content " +
+                "WHERE YEAR(creationDate) = ? AND contenttype_id=1 " +
+                "GROUP BY month";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new Object[]{year});
+        return new Gson().toJson(result);   //convert the list to json
     }
 
     @Override
     public String getTopTenVotedQuestions() {
-        return null;
+        final String sql = "SELECT content_id as qid, Count(*) as count " +
+                "FROM vote " +
+                "WHERE content_id IN (SELECT id FROM content WHERE contenttype_id=1) " +
+                "GROUP BY qid " +
+                "ORDER BY count desc " +
+                "LIMIT 10";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        return new Gson().toJson(result);   //convert the list to json
     }
 }
