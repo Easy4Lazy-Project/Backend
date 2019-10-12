@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("api/v1/post/a")
+@CrossOrigin
 @Api(value = ": Answer Controller Resource" )
 public class AnswerController {
 
@@ -63,5 +64,10 @@ public class AnswerController {
     @GetMapping(path="/count")          // we need this for our dashboard
     public int getTotalAnswersCount(){
         return answerService.getTotalAnswersCount();
+    }
+
+    @GetMapping(path="/sapm/{year}")
+    public String getQuestionsPerMonth(@PathVariable("year") @NotNull int year){
+        return answerService.getAnswersPerMonth(year);
     }
 }

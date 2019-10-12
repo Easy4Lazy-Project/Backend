@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @RequestMapping("api/v1/content/v")
 @RestController
+@CrossOrigin
 @Api(value = " : Vote Controller Resource" )
 public class VoteController {
     private final VoteService voteService;

@@ -59,28 +59,6 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
               return Utils.returnErrorJsonResponse("Answer Submission Failed!!!") ;
         }
 
-//        return jdbcTemplate.execute(sql, (PreparedStatementCallback<String>) ps -> {
-//            ps.setInt(1,userId);
-//            ps.setString(2, ans);
-//            ps.setInt(3,questionId);
-//            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
-//            JsonObject jo = new JsonObject();
-//            if(ps.executeUpdate()>0){
-//                ResultSet keys = ps.getGeneratedKeys();
-//                int qid = 0;
-//                if(keys.next())
-//                    qid = keys.getInt(1);
-//
-//                jo.addProperty("message", "Answer Submission Successful");
-//                jo.addProperty("status", true);
-//                jo.addProperty("contentId",qid);
-//                return jo.toString();
-//            }
-//            jo.addProperty("message", "Answer Submission Failed!!!");
-//            jo.addProperty("status", true);
-//            return "";
-//        });
-
     }
 
     //TODO: implement
@@ -104,5 +82,10 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
     public int getTotalAnswersCount() {
         final String sql = "SELECT COUNT(*) FROM content where contenttype_id=2";
         return jdbcTemplate.queryForObject(sql, null, Integer.class );
+    }
+
+    @Override
+    public String getAnswersPerMonth(int year) {
+        return null;
     }
 }

@@ -55,4 +55,11 @@ public interface AnswerDao {
      */
     int getTotalAnswersCount();
 
+    /**
+     *
+     * @return  the total numbers of answers  based on months in the year
+     * we need it for the dashboard
+     */
+    String getAnswersPerMonth(int year);
+
 }
