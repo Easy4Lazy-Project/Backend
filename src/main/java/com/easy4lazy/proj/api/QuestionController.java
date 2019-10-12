@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @RequestMapping("api/v1/content/q")
 @RestController
+@CrossOrigin
 @Api(value = " : Vote Controller Resource" )
 public class QuestionController {
     private final QuestionService questionService;
@@ -78,6 +79,16 @@ public class QuestionController {
             })
     @GetMapping(path="/count")
     public int getTotalQuestionsCount(){ return questionService.getTotalAnswersCount();
+    }
+
+    @GetMapping(path="/sqpm/{year}")
+    public String getQuestionsPerMonth(@PathVariable("year") @NotNull int year){
+        return questionService.getQuestionsPerMonth(year);
+    }
+
+    @GetMapping(path="/sttvq")
+    public String getTopTenVotedQuestions(){
+        return questionService.getTopTenVotedQuestions();
     }
 
 

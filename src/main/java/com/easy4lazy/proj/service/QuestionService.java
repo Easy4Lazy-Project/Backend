@@ -38,4 +38,12 @@ public class QuestionService {
     public int getTotalAnswersCount(){
         return questionDao.getTotalQuestionsCount();
     }
+
+    public String getQuestionsPerMonth(int year){
+        return questionDao.getQuestionsPerMonth(year);
+    }
+
+    public String getTopTenVotedQuestions(){
+        return questionDao.getTopTenVotedQuestions();
+    }
 }

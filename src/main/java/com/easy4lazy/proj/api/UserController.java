@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 @RequestMapping("api/v1/user")
 @RestController
+@CrossOrigin
 @Api(value = " : User Controller Resource" )
 public class UserController {
 
@@ -23,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = " : sign Up Successful")
+    @ApiOperation(value = " : Sign Up Successful")
     @PostMapping(path="/create")
     public String signUp(@Valid @NonNull @RequestBody User user) {
         return userService.signUp(user);

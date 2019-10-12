@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 @RequestMapping("api/v1/content/c")
 @RestController
+@CrossOrigin
 @Api(value = " : Comment Controller Resource" )
 public class CommentController {
     private final CommentService commentService;

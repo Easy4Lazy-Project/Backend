@@ -63,6 +63,22 @@ public interface QuestionDao {
      */
     int getTotalQuestionsCount();
 
+    /**
+     *
+     * @return  the total numbers of questions  based on months in the year
+     * we need it for the dashboard
+     */
+    String getQuestionsPerMonth(int year);
+
+    /**
+     *
+     * @return  top ten voted questions
+     * we need it for the dashboard
+     */
+    String getTopTenVotedQuestions();
+
+
+
 
 
 

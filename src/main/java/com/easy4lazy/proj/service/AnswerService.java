@@ -34,5 +34,9 @@ public class AnswerService {
         return answerDao.getTotalAnswersCount();
     }
 
+    public String getAnswersPerMonth(int year){
+        return answerDao.getAnswersPerMonth(year);
+    }
+
 
 }

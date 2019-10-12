@@ -60,28 +60,6 @@ public class CommentMySqlDataAccessCaller implements CommentDao {
         }
 
 
-//        return jdbcTemplate.execute(sql, (PreparedStatementCallback<String>) ps -> {
-//            ps.setInt(1,userId);
-//            ps.setString(2, comment);
-//            ps.setInt(3,contentId);
-//            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
-//            JsonObject jo = new JsonObject();
-//            if(ps.executeUpdate()>0){
-//                ResultSet keys = ps.getGeneratedKeys();
-//                int qid = 0;
-//                if(keys.next())
-//                    qid = keys.getInt(1);
-//
-//                jo.addProperty("message", "Comment Submission Successful");
-//                jo.addProperty("status", true);
-//                jo.addProperty("contentId",qid);
-//                return jo.toString();
-//            }
-//            jo.addProperty("message", "Comment Submission Failed");
-//            jo.addProperty("status", false);
-//
-//            return jo.toString();
-//        });
     }
 
     @Override
