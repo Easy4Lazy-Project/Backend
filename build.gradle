@@ -47,6 +47,9 @@ dependencies {
 			}
 		}
 	}
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core .. for Testing
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '3.1.0'
+
 }
 buildScan {
 
