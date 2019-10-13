@@ -2,4 +2,4 @@ https://guides.gradle.org/building-spring-boot-2-projects-with-gradle/#noteworth
 
 To build the executable jar you can execute the following command: ./gradlew bootJar
 The executable jar is located in the : build/libs
-can run it by executing the following command: java -jar build/libs/gradle-spring-boot-project.jar
+can run it by executing the following command: java -jar build/libs/proj-0.0.1-SNAPSHOT.jar
