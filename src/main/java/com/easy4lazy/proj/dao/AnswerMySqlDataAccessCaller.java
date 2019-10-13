@@ -4,6 +4,7 @@ import com.easy4lazy.proj.model.Answer;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -78,10 +79,26 @@ public class AnswerMySqlDataAccessCaller implements AnswerDao {
     @Override
     public String getQuestionAnswers(int userId, int questionId) {
         final String sql =
-                "SELECT * FROM content WHERE contenttype_id=1 " +
-                //"AND content_id = 23 " +
-                "ORDER BY creationDate DESC";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        "SELECT c.body, c.creationDate, c.id, u.name, c.tags, c.answerCount, " +
+                "SUM(CASE WHEN v.voteType_id = 1 THEN 1 ELSE 0 END) AS likes, " +
+                "SUM(CASE WHEN v.voteType_id = 2 THEN 1 ELSE 0 END) AS dislikes, " +
+                "(SELECT (CASE WHEN v1.voteType_id = 1 THEN 'like' ELSE 'dislike' END) " +
+                    "FROM vote v1 " +
+                    "WHERE v1.user_id = c.user_id " +
+                    "AND v1.content_id = c.id) " +
+                "AS myvote " +
+        "FROM content c " +
+        "LEFT JOIN user u ON u.id = c.user_id " +
+        "LEFT JOIN vote v ON v.content_id = c.id " +
+        "WHERE c.contentType_id = 2 " +
+            "AND c.user_id = ? " +
+            "AND c.content_id = ? " +
+        "GROUP BY 1 , 2 , 3 , 4 , 5 , 6 " +
+        "ORDER BY c.creationDate DESC";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,
+                new Object[]{userId,questionId});
+
         //return result.toString();
         return new Gson().toJson(result);//convert the list to json
     }

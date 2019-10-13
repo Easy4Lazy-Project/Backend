@@ -31,12 +31,12 @@ public class CommentController {
         return commentService.postComment(userId, token, contentId, comment);
     }
 
-    /**** features disabled for v0.1.0   *****
     @GetMapping(path="/get/{uid}/{id}")
     public String getQuestionComments(@PathVariable("uid") int userId, @PathVariable("id") @Valid @NotNull int questionId){
         return commentService.getQuestionComments(userId, questionId);
     }
 
+    /**** features disabled for v0.1.0   *****
     @GetMapping(path="/get/{uid}/{id}")
     public String getAnswerComments(@PathVariable("uid") int userId, @PathVariable("id") @Valid @NotNull int answerId){
         return commentService.getAnswerComments(userId, answerId);

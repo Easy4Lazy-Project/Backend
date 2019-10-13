@@ -38,7 +38,7 @@ public interface AnswerDao {
 
     /**
      *  return the answers to a question
-     *  @param userId : id of the current  user to check myvote
+     * @param userId : id of the current  user to check myvote
      * @param questionId : id of the content in the content table
      * @return [{
      *      *       body, createdDate, id, name of user, tags, answerCount,commentCount, like, dislike,

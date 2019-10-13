@@ -49,7 +49,7 @@ public class AnswerController {
     ****/
 
     @GetMapping(path="/get/{uid}/{token}/{id}")
-    public String getQuestionAnswers(@PathVariable("id") @Valid @NotNull int userId, @PathVariable("id") @Valid @NotNull int questionId){
+    public String getQuestionAnswers(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("id") @Valid @NotNull int questionId){
         return answerService.getQuestionAnswers(userId, questionId);
     }
 
