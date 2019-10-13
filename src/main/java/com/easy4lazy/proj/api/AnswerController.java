@@ -46,14 +46,14 @@ public class AnswerController {
     public String deleteAnswer(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
         return answerService.deleteAnswer(userId, token, contentId);
     }
-
+     ***/
 
     @GetMapping(path="/get/{uid}/{token}/{id}")
     public String getQuestionAnswers(@PathVariable("id") @Valid @NotNull int userId, @PathVariable("id") @Valid @NotNull int questionId){
         return answerService.getQuestionAnswers(userId, questionId);
     }
 
-    ****/
+
    @ApiOperation(value = " : Returns answer count")
    @ApiResponses(
            value = {
