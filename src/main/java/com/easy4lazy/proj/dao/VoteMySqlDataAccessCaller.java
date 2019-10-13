@@ -18,23 +18,10 @@ public class VoteMySqlDataAccessCaller implements VoteDao {
     public VoteMySqlDataAccessCaller(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    @Override
-    public int voteQuestionUp(int contentId, int userId, String tokens) {
-        return 0;
-    }
+
 
     @Override
-    public int voteQuestionDown(int contentId, int userId, String tokens) {
-        return 0;
-    }
-
-    @Override
-    public int voteAnswerUp(int contentId, int userId, String tokens) {
-        return 0;
-    }
-
-    @Override
-    public int voteAnswerDown(int contentId, int userId, String tokens) {
+    public int vote(int contentId, int userId, int type, String tokens) {
         return 0;
     }
 

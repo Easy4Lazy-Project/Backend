@@ -73,12 +73,21 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
     public String getQuestion(int questionId) {
                                   
         //TODO very important
+        final String sql = "SELECT c.id as qid, c.subject, c.body,c.user_id,  Count(*) as count " +
+                "FROM vote v " +
+                " INNER JOIN content c ON v.content_id=c.id " +
+                "WHERE v.content_id IN (SELECT id FROM content WHERE c.contenttype_id=1) " +
+                "GROUP BY qid " +
+                "ORDER BY count desc " +
+                "LIMIT 10";
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
+        return new Gson().toJson(result);   //convert the list to json
          //return the question,
         //              comments,
                     //answers
                         //comments
-        final String sql = "SELECT ";
-        return null;
+       // final String sql = "SELECT ";
+       // return null;
     }
 
     @Override

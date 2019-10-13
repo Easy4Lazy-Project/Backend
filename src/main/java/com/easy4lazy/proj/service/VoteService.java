@@ -14,21 +14,11 @@ public class VoteService {
         this.voteDao = voteDao;
     }
 
-    public int voteQuestionUp(int contentId, int userId, String tokens){
-        return voteDao.voteQuestionUp(contentId, userId, tokens);
+    public int vote(int contentId, int userId, int type, String tokens){
+        return voteDao.vote(contentId, userId, type, tokens);
     }
 
-    public int voteQuestionDown(int contentId, int userId, String tokens){
-        return voteDao.voteQuestionDown(contentId, userId, tokens);
-    }
 
-    public int voteAnswerUp(int contentId, int userId, String tokens){
-        return voteDao.voteAnswerUp(contentId, userId, tokens);
-    }
-
-    public int voteAnswerDown(int contentId, int userId, String tokens){
-        return voteDao.voteAnswerDown(contentId, userId, tokens);
-    }
 
     public int getTotalQuestionVoteUp(){
         return voteDao.getTotalQuestionVoteUp();

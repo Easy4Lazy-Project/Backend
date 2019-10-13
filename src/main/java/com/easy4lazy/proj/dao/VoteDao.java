@@ -5,37 +5,13 @@ public interface VoteDao {
      *
      * @param contentId : question id
      * @param userId
+     * @param type
      * @param tokens
      * @return    total question vote up
      */
-    int voteQuestionUp(int contentId, int userId, String tokens);
+    int vote(int contentId, int userId, int type, String tokens);
 
-    /**
-     *
-     * @param contentId
-     * @param userId
-     * @param tokens
-     * @return   total question vote down
-     */
-    int voteQuestionDown(int contentId, int userId, String tokens);
 
-    /**
-     *
-     * @param contentId      : answer id
-     * @param userId
-     * @param tokens     //verify if user still logs in
-     * @return    total answer vote up
-     */
-    int voteAnswerUp(int contentId, int userId, String tokens);
-
-    /**
-     *
-     * @param contentId
-     * @param userId
-     * @param tokens
-     * @return       total answer vote down
-     */
-    int voteAnswerDown(int contentId, int userId, String tokens);
 
     /**
      *
