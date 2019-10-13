@@ -20,57 +20,21 @@ public class VoteController {
     public VoteController(VoteService voteService) {
         this.voteService = voteService;
     }
-    @ApiOperation(value = " : Returns vote Question Up")
+    @ApiOperation(value = " : Returns vote on a content")
     @ApiResponses(
             value = {
                     @ApiResponse(code = 100, message = "100 is the message"),
                     @ApiResponse(code = 200, message = "Successful  vote Question Up")
             }
     )
-    @GetMapping(path="/vqu/{uid}/{token}/{id}")
-    public int voteQuestionUp(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteQuestionUp(contentId, userId, token);
+    @PostMapping(path="/vote/{uid}/{token}/{id}/{type}")
+    public int voteQuestionUp(@PathVariable("uid") @Valid @NotNull int userId,
+                              @PathVariable("token") @Valid @NotNull String token,
+                              @PathVariable("type") @Valid @NotNull int type,
+                              @PathVariable("id") @Valid @NotNull int contentId){
+        return voteService.vote(contentId, userId, type, token);
     }
-    @ApiOperation(value = " : Returns vote Question Down")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 100, message = "100 is the message"),
-                    @ApiResponse(code = 200, message = "Successful  vote Question Down")
-            }
-    )
-    @GetMapping(path="/vqd/{uid}/{token}/{id}")
-    public int voteQuestionDown(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String tokens, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteQuestionDown(contentId, userId, tokens);
-    }
-    @ApiOperation(value = " : Returns vote Answer Up")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 100, message = "100 is the message"),
-                    @ApiResponse(code = 200, message = "Successful  vote Answer Up")
-            }
-    )
-    @GetMapping(path="/vau/{uid}/{token}/{id}")
-    public int voteAnswerUp(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteAnswerUp(contentId, userId, token);
-    }
-    @ApiOperation(value = " : Returns Total Question Vote Up")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 100, message = "100 is the message"),
-                    @ApiResponse(code = 200, message = "Successful Total Question Vote Up")
-            }
-    )
-    @GetMapping(path="/vad/{uid}/{token}/{id}")
-    public int voteAnswerDown(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteAnswerDown(contentId, userId, token);
-    }
-    @ApiOperation(value = " : Returns Total Question Vote Up")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(code = 100, message = "100 is the message"),
-                    @ApiResponse(code = 200, message = "Successful Total Question Vote Up")
-            }
-    )
+
     @GetMapping(path="/tqvu")
     public int getTotalQuestionVoteUp(){
         return voteService.getTotalQuestionVoteUp();

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -71,14 +72,110 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
     //TODO implements this
     @Override
     public String getQuestion(int questionId) {
-                                  
-        //TODO very important
+        final String sql =
+                "SELECT c.subject, c.body, c.creationDate, c.id, u.name, c.tags, c.answerCount, " +
+                        "(SELECT COUNT(id) FROM content c1 WHERE c1.content_id = ? AND c1.contentType_id = 3) AS commentCount, " +
+                        "SUM(CASE WHEN v.voteType_id = 1 THEN 1 ELSE 0 END) AS likes, " +
+                        "SUM(CASE WHEN v.voteType_id = 2 THEN 1 ELSE 0 END) AS dislikes " +
+                        "FROM content c " +
+                        "LEFT JOIN user u ON u.id = c.user_id " +
+                        "LEFT JOIN vote v ON v.content_id = c.id " +
+                        "WHERE c.contentType_id = 1 " +
+                        "AND c.id = ? " +
+                        "GROUP BY 1 , 2 , 3 , 4 , 5 , 6, 7 " +
+                        "ORDER BY c.creationDate DESC";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,
+                new Object[]{questionId,questionId});
+
+
+        // GET COMMENTS FOR QUESTION
+        final String sql_comques =
+                "SELECT 'com_ques' as comType, c.contentType_id, c.id, c.content_id, u.name, c.body, c.creationDate " +
+                        "FROM content c " +
+                        "LEFT JOIN user u ON u.id = c.user_id " +
+                        "WHERE c.contentType_id = 3 " +
+//                "AND c.user_id = ? " +
+                        "AND c.content_id = ? " +
+                        "ORDER BY c.creationDate DESC";
+
+        List<Map<String, Object>> result_comques = jdbcTemplate.queryForList(sql_comques,
+                new Object[]{questionId});
+
+
+        // GET ANSWERS FOR QUESTION
+        final String sql_ansques =
+                "SELECT c.body, c.creationDate, c.id, u.name, c.tags, c.answerCount, c.contentType_id,  " +
+                        "SUM(CASE WHEN v.voteType_id = 1 THEN 1 ELSE 0 END) AS likes, " +
+                        "SUM(CASE WHEN v.voteType_id = 2 THEN 1 ELSE 0 END) AS dislikes " +
+//                        "(SELECT (CASE WHEN v1.voteType_id = 1 THEN 'like' ELSE 'dislike' END) " +
+//                        "FROM vote v1 " +
+//                        "WHERE v1.user_id = c.user_id " +
+//                        "AND v1.content_id = c.id) " +
+//                        "AS myvote " +
+                        "FROM content c " +
+                        "LEFT JOIN user u ON u.id = c.user_id " +
+                        "LEFT JOIN vote v ON v.content_id = c.id " +
+                        "WHERE c.contentType_id = 2 " +
+//                        "AND c.user_id = ? " +
+                        "AND c.content_id = ? " +
+                        "GROUP BY 1 , 2 , 3 , 4 , 5 , 6, 7 " +
+                        "ORDER BY c.creationDate DESC";
+
+        List<Map<String, Object>> result_ansques = jdbcTemplate.queryForList(sql_ansques,
+                new Object[]{questionId});
+
+        int ansId;
+        List<Map<String, Object>> result_allComAns = new ArrayList<>();
+
+        for (Map<String, Object> answer : result_ansques) {
+            ansId = (Integer) answer.get("id");
+
+            // GET COMMENTS FOR QUESTION
+            // loop through answers obtained previously to get comments for each of them
+            final String sql_comans =
+                    "SELECT 'com_ans' as comType, c.contentType_id, c.id, c.content_id, u.name, c.body, c.creationDate " +
+                            "FROM content c " +
+                            "LEFT JOIN user u ON u.id = c.user_id " +
+                            "WHERE c.contentType_id = 3 " +
+//                            "AND c.user_id = " +
+                            "AND c.content_id = " + ansId +
+                            " ORDER BY c.creationDate DESC";
+
+            List<Map<String, Object>> result_comans = jdbcTemplate.queryForList(sql_comans,
+                    new Object[]{});
+
+            result_allComAns.addAll(result_comans);
+        }
+
+        List<Map<String, Object>> completeList = new ArrayList<>();
+        completeList.addAll(result);
+        completeList.addAll(result_comques);
+        completeList.addAll(result_ansques);
+        completeList.addAll(result_allComAns);
+
+        //return result.toString();
+        return new Gson().toJson(completeList);//convert the list to json
+//        //TODO very important
+//        final String sql = "SELECT c.id as qid, c.subject, c.body, c.user_id, u.name, c.creationDate, " +
+//                "GROUP_CONCAT((SELECT * FROM get_comments_of_questions gc WHERE c.content_id = ?) SEPARATOR ' , ') as comments, " +
+//                "GROUP_CONCAT((SELECT * FROM get_answers ga WHERE c.content_id = ?) SEPARATOR ' , ')  as answers " +
+//                "FROM content c " +
+//                "INNER JOIN get_comments_of_questions gc ON gc.content_id=c.id " +
+//                "INNER JOIN get_answers ga ON ga.content_id=c.id " +
+//                "INNER JOIN user u ON c.user_id=u.id " +
+//                "WHERE v.content_id =? " +
+//               // "GROUP BY qid " +
+//                "ORDER BY c.creationDate desc ";
+//               // "LIMIT 10";
+//        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new Object[]{questionId,questionId,questionId});
+//        return new Gson().toJson(result);   //convert the list to json
          //return the question,
         //              comments,
                     //answers
                         //comments
-        final String sql = "SELECT ";
-        return null;
+       // final String sql = "SELECT ";
+       // return null;
     }
 
     @Override
