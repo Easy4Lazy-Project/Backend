@@ -71,6 +71,7 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
     //TODO implements this
     @Override
     public String getQuestion(int questionId) {
+                                  
         //TODO very important
          //return the question,
         //              comments,
@@ -82,7 +83,17 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
 
     @Override
     public String getAllQuestions() {
-        final String sql = "SELECT * FROM content WHERE contenttype_id=1 ORDER BY creationDate DESC";
+        //create view [likes_count] as select content_id, count(*) as count from vote where votetype_id=1 group by content_id;
+        //create view [dislikes_count] as select content_id, count(*) as count from vote where votetype_id=2 group by content_id;
+        //final String sql = "SELECT * FROM content WHERE contenttype_id=1 ORDER BY creationDate DESC";
+        final String sql = "SELECT c.id, c.subject, c.body,c.creationDate, c.tags, c.user_id, u.name, " +
+                "l.count as likes, d.count as dislike " +
+                "FROM content c INNER JOIN user u on c.user_id = u.id " +
+                "LEFT JOIN likes_count l ON c.id = l.content_id " +
+                "LEFT JOIN dislikes_count d ON c.id = d.content_id " +
+                "WHERE c.contenttype_id=1 " +
+                "ORDER BY c.creationDate DESC ";// +
+               // "LIMIT 3";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         //return result.toString();
         return new Gson().toJson(result);//convert the list to json
