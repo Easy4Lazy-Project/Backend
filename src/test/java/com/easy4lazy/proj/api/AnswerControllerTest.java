@@ -23,6 +23,17 @@ public class AnswerControllerTest {
     }
 
     @Test
+    public void postAnswertest() {
+        int useridM = 1;
+        String tokenm = "xdcfvgbhnjmkjhgffgvhjk";
+        int questionIdm = 22;
+        String ansm = "yourAnswer";
+
+        when(answerService.postAnswer(useridM, tokenm, questionIdm, ansm)).thenReturn("200");
+        assertEquals("Test Post Answer", answerService.postAnswer(useridM, tokenm, questionIdm, ansm), "200");
+
+    }
+    @Test
     public void getQuestionAnswersTest() {
         int userId = 1;
         int questionId = 22;
@@ -43,5 +54,6 @@ public class AnswerControllerTest {
         assertEquals("Test get Answers Per Month ", answerService.getAnswersPerMonth(year), ret);
 
     }
+
 
 }
