@@ -1,8 +1,16 @@
 package com.easy4lazy.proj.dao;
 
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Purpose: class that interact with the mysql database
@@ -21,8 +29,29 @@ public class VoteMySqlDataAccessCaller implements VoteDao {
 
 
     @Override
-    public int vote(int contentId, int userId, int type, String tokens) {
-        return 0;
+    public int vote(int contentId, int userId, int type, String tokens){
+        //check token
+        final String sql = "REPLACE INTO vote (user_id,content_id,createdDate,votetype_id) VALUES (?,?,?,?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            public PreparedStatement createPreparedStatement(Connection connection)
+                    throws SQLException {
+                PreparedStatement ps =  connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1,userId);
+                ps.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                ps.setInt(2,contentId);
+                ps.setInt(4, type);
+                return ps;
+            }
+        }, keyHolder);
+        long id = keyHolder.getKey().longValue();
+        JsonObject jo = new JsonObject();
+        if(id > 0L){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     @Override
