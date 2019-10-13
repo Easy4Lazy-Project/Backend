@@ -1,6 +1,7 @@
 package com.easy4lazy.proj.dao;
 
 import com.easy4lazy.proj.model.Comment;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Purpose: class that interact with the mysql database
@@ -58,13 +61,26 @@ public class CommentMySqlDataAccessCaller implements CommentDao {
         else {
             return Utils.returnErrorJsonResponse("Comment Submission Failed!!!") ;
         }
-
-
+        
     }
 
     @Override
     public String getQuestionComments(int userId, int questionId) {
-        return null;
+        final String sql =
+        "SELECT c.id, c.content_id, u.name, c.body, c.creationDate " +
+                "FROM content c " +
+                "LEFT JOIN user u ON u.id = c.user_id " +
+                "WHERE c.contentType_id = 3 " +
+                "AND c.user_id = ? " +
+                "AND c.content_id = ? " +
+                "ORDER BY c.creationDate DESC";
+
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,
+                new Object[]{userId,questionId});
+
+        //return result.toString();
+        return new Gson().toJson(result);//convert the list to json
+
     }
 
     @Override
