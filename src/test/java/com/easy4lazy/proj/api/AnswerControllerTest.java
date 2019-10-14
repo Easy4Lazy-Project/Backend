@@ -54,6 +54,11 @@ public class AnswerControllerTest {
         assertEquals("Test get Answers Per Month ", answerService.getAnswersPerMonth(year), ret);
 
     }
-
+@Test
+    public void getTotalAnswersCountTest(){
+        int countEx=10;
+        when(answerService.getTotalAnswersCount()).thenReturn(countEx);
+        assertEquals("Test get Total Answers Count",answerService.getTotalAnswersCount(),countEx);
+}
 
 }
