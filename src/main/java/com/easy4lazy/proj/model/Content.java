@@ -1,73 +1,70 @@
 package com.easy4lazy.proj.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.lang.NonNull;
-
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
+@Entity
 public class Content {
-    @NotBlank @NotNull
-    int id;
+    @Id
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    Integer id;
+
     //this can be null if it is a question
-    int content_id;
+    @Column(name = "content_id")
+    Integer contentId; // for custom selection I need this type of naming convention (contentId) but for inserting I
+                        // think this type of naming convention is use (content_id) that i mention it in @Column
+
     @NotBlank @NotNull
-    int contentType_id;
-    @NotBlank @NotNull
+    @Column(name = "body")
     String body;
-    @NotBlank @NotNull
-    LocalDateTime creationDate;
-    @NotBlank @NotNull
-    int user_id;
 
-    String name;
+    @Column(name = "creation_date")
+    Timestamp creationDate;
 
-    public int getId() {
+    @NotNull
+    @Column(name = "user_id")
+    Integer userId;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getContent_id() {
-        return content_id;
+    public Integer getContentId() {
+        return contentId;
     }
 
-    public void setContent_id(int content_id) {
-        this.content_id = content_id;
-    }
-
-    public int getContentType_id() {
-        return contentType_id;
-    }
-
-    public void setContentType_id(int contentType_id) {
-        this.contentType_id = contentType_id;
+    public void setContentId(Integer contentId) {
+        this.contentId = contentId;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(@JsonProperty("body") String body) {
+    public void setBody(String body) {
         this.body = body;
     }
 
-    public LocalDateTime getCreationDate() {
+    public Timestamp getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(Timestamp creationDate) {
         this.creationDate = creationDate;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(@JsonProperty int user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

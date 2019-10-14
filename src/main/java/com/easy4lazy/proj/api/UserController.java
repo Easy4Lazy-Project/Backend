@@ -3,12 +3,11 @@ package com.easy4lazy.proj.api;
 import com.easy4lazy.proj.model.User;
 import com.easy4lazy.proj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping("api/v1/user")
+@RequestMapping("easy4lazy/user")
 @RestController
 public class UserController {
 
@@ -18,24 +17,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(path="/create")
-    public String signUp(@Valid @NonNull @RequestBody User user) {
+    @PostMapping(path = "/signup")
+    public User signUp(@RequestBody @Valid User user){
         return userService.signUp(user);
     }
 
-    @PostMapping(path="/login/{email}/{pwd}")
-    public String login(@PathVariable("email") @Valid @NonNull  String email, @PathVariable("pwd") @Valid @NonNull String pwd) {
-        return  userService.login(email,pwd);
+    @PostMapping(path = "/login")
+    public User login(@RequestBody User user){
+        return userService.login(user);
     }
-
-    @GetMapping(path="/logout/{uid}")
-    public boolean signOut(@PathVariable("uid") @Valid @NonNull String userId) {
-        return userService.signOut(userId);
-    }
-
-    @GetMapping(path = "/count")
-    public int getTotalUsersCount(){
-        return userService.getTotalUsersCount();
-    }
-
 }

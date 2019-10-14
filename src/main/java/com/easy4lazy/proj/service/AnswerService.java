@@ -1,38 +1,39 @@
 package com.easy4lazy.proj.service;
 
-import com.easy4lazy.proj.dao.AnswerDao;
+import com.easy4lazy.proj.repository.AnswerRepository;
+import com.easy4lazy.proj.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AnswerService {
-    private final AnswerDao answerDao;
+
+    AnswerRepository answerRepository;
 
     @Autowired
-    public AnswerService(@Qualifier("answerMysql") AnswerDao answerDao) {
-        this.answerDao = answerDao;
+    public AnswerService(AnswerRepository answerRepository){
+        this.answerRepository = answerRepository;
     }
 
-    public String postAnswer(int userId, String token, int qid, String ans){
-        return answerDao.postAnswer(userId, token, qid, ans);
+    public Answer postAnswer(Answer answer){
+        return answerRepository.save(answer);
     }
 
-    public String editAnswer(int userId, String token, int qid, String ans){
-        return answerDao.editAnswer(userId, token, qid, ans);
+    public Answer editAnswer(Answer answer){
+        return answerRepository.save(answer);
     }
 
-    public String deleteAnswer(int userId, String token, int contentId){
-        return answerDao.deleteAnswer(userId, token, contentId);
+    public void deleteAnswer(Answer answer){
+        answerRepository.deleteById(answer.getId());
     }
 
-    public String getQuestionAnswers(int userId, int questionId){
-        return answerDao.getQuestionAnswers(userId, questionId);
+    public List<Answer> getAnswersOfQuestion(Answer answer){
+        return answerRepository.findByContentTypeIdAndContentId(2,answer.getContentId());
     }
 
-    public int getTotalAnswersCount(){
-        return answerDao.getTotalAnswersCount();
+    public Integer getTotalNumberOfAnswers(Answer answer){
+        return answerRepository.countAllByContentId(answer.getContentId());
     }
-
-
 }

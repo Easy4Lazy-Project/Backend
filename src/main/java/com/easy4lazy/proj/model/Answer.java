@@ -1,20 +1,36 @@
 package com.easy4lazy.proj.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.Valid;
+
+@Entity
 public class Answer extends Content {
 
-   final int contentType_id = 2;
-   int commentCount;
+    public Answer(){}
 
-    @Override
-    public int getContentType_id() {
-        return contentType_id;
+    public Answer(@Valid @JsonProperty("content_id") Integer content_id,
+                  @Valid @JsonProperty("body") String body,
+                  @Valid @JsonProperty("user_id") Integer user_id ) {
+        this.contentId = content_id;
+        this.body = body;
+        this.userId = user_id;
     }
 
-    public int getCommentCount() {
+    @Column(name = "content_type_id")
+   final Integer contentTypeId = 2;
+
+
+   @Column(name = "comment_count")
+   Integer commentCount;
+
+    public Integer getContentTypeId() {
+        return contentTypeId;
+    }
+
+    public Integer getCommentCount() {
         return commentCount;
-    }
-
-    public void setCommentCount(int commentCount) {
-        this.commentCount = commentCount;
     }
 }

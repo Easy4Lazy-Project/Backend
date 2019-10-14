@@ -1,41 +1,61 @@
 package com.easy4lazy.proj.service;
 
-import com.easy4lazy.proj.dao.QuestionDao;
+import com.easy4lazy.proj.repository.QuestionRepository;
+
 import com.easy4lazy.proj.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class QuestionService {
-    private final QuestionDao questionDao;
 
     @Autowired
-    public QuestionService(@Qualifier("questionMysql") QuestionDao questionDao) {
-        this.questionDao = questionDao;
+    QuestionRepository questionRepository;
+    public QuestionService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
 
-    public String postQuestion(int userId, String token, String question, String subject, String tags){
-        return questionDao.postQuestion(userId, token, question, subject, tags);
+    public Question postQuestion(Question q){
+        return questionRepository.save(q);
     }
 
-    public String getQuestion(int questionId){
-        return questionDao.getQuestion(questionId);
+    public Optional<Question> getQuestion(Question question){
+        return questionRepository.findById(question.getId());
     }
 
-    public String getAllQuestions(){
-        return questionDao.getAllQuestions();
+    public List<Question> getAllQuestions(Question question){
+        return questionRepository.findAllByContentTypeId(question.getContentTypeId());
     }
 
-    public String deleteQuestion(int userId, String token, int contentId){
-        return questionDao.deleteQuestion(userId, token, contentId);
+    public void deleteQuestion(Question question){
+        questionRepository.deleteById(question.getId());
     }
 
-    public String editQuestion(int userId, String token, String question, String subject, String tags){
-        return questionDao.postQuestion(userId, token, question, subject, tags);
+    public Question editQuestion(Question question){
+        return questionRepository.save(question);
     }
 
-    public int getTotalAnswersCount(){
-        return questionDao.getTotalQuestionsCount();
+    public Integer getTotalNumberOfQuestion(Question question){
+        return questionRepository.countAllByContentTypeId(question.getContentTypeId());
+    }
+
+    public List<Question> getQuestionAnswerAndComment(Question question){
+        List<Question> result = new ArrayList<>();
+        Optional<Question> ques = getQuestion(question);
+
+        if(ques.isPresent()){
+            Question findedQuestion = ques.get();
+            result.add(findedQuestion);
+            result.addAll(questionRepository.selectCommentsOfQuestion(findedQuestion.getId()));
+            result.addAll(questionRepository.selectAnswersAndComments(findedQuestion.getId(), findedQuestion.getId()));
+        }
+        else{
+            System.out.println("Question not found!");
+        }
+        return result;
     }
 }

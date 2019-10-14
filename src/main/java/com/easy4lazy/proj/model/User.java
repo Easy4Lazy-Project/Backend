@@ -1,16 +1,27 @@
 package com.easy4lazy.proj.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+@Entity
 public class User {
-    int id; //userId
-    String aboutMe;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int id;
+    String about_me;
     int age;
-    LocalDateTime createdDate;
+    LocalDateTime creation_date;
+    @NotBlank
     String name;
     String location;
+    @NotBlank
+    @NotNull
     String email;
     String password;
     String token;
@@ -27,15 +38,15 @@ public class User {
         this.password = password;
     }
 
-    /**
-     * Suitable for isUserLoggedin method call
-     * @param id
-     * @param token
-     */
-    public User(@JsonProperty("userId") int id, @JsonProperty("token") String token) {
-        this.id = id;
-        this.token = token;
-    }
+//    /**
+//     * Suitable for isUserLoggedin method call
+//     * @param id
+//     * @param token
+//     */
+//    public User(@JsonProperty("userId") int id, @JsonProperty("token") String token) {
+//        this.id = id;
+//        this.token = token;
+//    }
 
     public int getId() {
         return id;
@@ -45,8 +56,8 @@ public class User {
         return age;
     }
 
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
+    public LocalDateTime getCreation_date() {
+        return creation_date;
     }
 
     public String getName() {
@@ -63,5 +74,9 @@ public class User {
 
     public String getToken() {
         return token;
+    }
+
+    public String getPassword(){
+        return password;
     }
 }

@@ -1,57 +1,58 @@
 package com.easy4lazy.proj.api;
 
+import com.easy4lazy.proj.model.Vote;
 import com.easy4lazy.proj.service.VoteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-@RequestMapping("api/v1/content/v")
+@RequestMapping("easy4lazy/vote")
 @RestController
 public class VoteController {
-    private final VoteService voteService;
 
+    final private VoteService voteService;
+
+    @Autowired
     public VoteController(VoteService voteService) {
         this.voteService = voteService;
     }
 
-    @GetMapping(path="/vqu/{uid}/{token}/{id}")
-    public int voteQuestionUp(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteQuestionUp(contentId, userId, token);
+    @PostMapping(path = "/votequestionup")
+    public Vote voteQuestionUp(@RequestBody Vote vote){
+        return voteService.vote(vote);
     }
 
-    @GetMapping(path="/vqd/{uid}/{token}/{id}")
-    public int voteQuestionDown(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String tokens, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteQuestionDown(contentId, userId, tokens);
+    @PostMapping(path = "/votequestiondown")
+    public Vote voteQuestionDown(@RequestBody Vote vote){
+        return voteService.vote(vote);
     }
 
-    @GetMapping(path="/vau/{uid}/{token}/{id}")
-    public int voteAnswerUp(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteAnswerUp(contentId, userId, token);
+    @PostMapping(path = "/voteanswerup")
+    public Vote voteAnswerUp(@RequestBody Vote vote){
+        return voteService.vote(vote);
     }
 
-    @GetMapping(path="/vad/{uid}/{token}/{id}")
-    public int voteAnswerDown(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token, @PathVariable("id") @Valid @NotNull int contentId){
-        return voteService.voteAnswerDown(contentId, userId, token);
+    @PostMapping(path = "/voteanswerdown")
+    public Vote voteAnswerDown(@RequestBody Vote vote){
+        return voteService.vote(vote);
     }
 
-    @GetMapping(path="/tqvu")
-    public int getTotalQuestionVoteUp(){
-        return voteService.getTotalQuestionVoteUp();
+    @GetMapping(path = "/totalquestionvoteup")
+    public Integer getTotalQuestionVoteUp(@RequestBody Vote vote){
+        return voteService.totalVote(vote);
     }
 
-    @GetMapping(path="/tqvd")
-    public int getTotalQuestionVoteDown(){
-        return voteService.getTotalQuestionVoteDown();
+    @GetMapping(path = "/totalquestionvotedown")
+    public Integer getTotalQuestionVoteDown(@RequestBody Vote vote){
+        return voteService.totalVote(vote);
     }
 
-    @GetMapping(path="/tavp")
-    public int getTotalAnswerVoteUp(){
-        return voteService.getTotalAnswerVoteUp();
+    @GetMapping(path = "/totalanswervoteup")
+    public Integer getTotalAnswerVoteUp(@RequestBody Vote vote){
+        return voteService.totalVote(vote);
     }
 
-    @GetMapping(path="/tavd")
-    public int getTotalAnswerVoteDown(){
-        return voteService.getTotalAnswerVoteDown();
+    @GetMapping(path = "/totalanswervotedown")
+    public Integer getTotalAnswerVoteDown(@RequestBody Vote vote){
+        return voteService.totalVote(vote);
     }
 }

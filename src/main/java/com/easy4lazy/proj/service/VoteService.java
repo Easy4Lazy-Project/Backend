@@ -1,50 +1,25 @@
 package com.easy4lazy.proj.service;
 
-import com.easy4lazy.proj.dao.VoteDao;
+import com.easy4lazy.proj.repository.VoteRepository;
+import com.easy4lazy.proj.model.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VoteService {
-    private final VoteDao voteDao;
+
+    private final VoteRepository voteRepository;
 
     @Autowired
-    public VoteService(@Qualifier("voteMysql") VoteDao voteDao) {
-        this.voteDao = voteDao;
+    public VoteService(VoteRepository voteRepository) {
+        this.voteRepository = voteRepository;
     }
 
-    public int voteQuestionUp(int contentId, int userId, String tokens){
-        return voteDao.voteQuestionUp(contentId, userId, tokens);
+    public Vote vote(Vote vote){
+        return voteRepository.save(vote);
     }
 
-    public int voteQuestionDown(int contentId, int userId, String tokens){
-        return voteDao.voteQuestionDown(contentId, userId, tokens);
+    public Integer totalVote(Vote vote){
+        return voteRepository.countAllByVoteTypeIdAndContentId(vote.getVoteTypeId(), vote.getContentId());
     }
-
-    public int voteAnswerUp(int contentId, int userId, String tokens){
-        return voteDao.voteAnswerUp(contentId, userId, tokens);
-    }
-
-    public int voteAnswerDown(int contentId, int userId, String tokens){
-        return voteDao.voteAnswerDown(contentId, userId, tokens);
-    }
-
-    public int getTotalQuestionVoteUp(){
-        return voteDao.getTotalQuestionVoteUp();
-    }
-
-    public int getTotalQuestionVoteDown(){
-        return voteDao.getTotalQuestionVoteDown();
-    }
-
-    public int getTotalAnswerVoteUp(){
-        return voteDao.getTotalAnswerVoteUp();
-    }
-
-    public int getTotalAnswerVoteDown(){
-        return voteDao.getTotalAnswerVoteDown();
-    }
-
-
 }
