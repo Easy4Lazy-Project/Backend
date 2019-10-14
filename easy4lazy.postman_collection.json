@@ -1,0 +1,990 @@
+{
+	"info": {
+		"_postman_id": "18a619d4-a091-4fd5-a1b0-f62c27401c35",
+		"name": "easy4lazy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"fardi\",\n\t\"email\": \"jamshid@gmail.com\",\n\t\"pwd\": \"127\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/user/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post question",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"body\": \"this is for testing 2323 \",\n\t\"subject\": \" first question\",\n\t\"tags\": \"hibernate\",\n\t\"user_id\" : 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/postquestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"postquestion"
+					]
+				},
+				"description": "Post a new question"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 27\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/getqestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"getqestion"
+					]
+				},
+				"description": "Get question by id of question"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contentTypeId\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/getallquestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"getallquestion"
+					]
+				},
+				"description": "Get question by giving the type of id value"
+			},
+			"response": []
+		},
+		{
+			"name": "Total number of questions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_type_id\" : 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/totalnumberofquestions",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"totalnumberofquestions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Question, Answers and Comments",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/getquestionanswersandcomments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"getquestionanswersandcomments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit question",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 21,\n\t\"body\": \"Updated question\",\n\t\"subject\": \"Update and edit\",\n\t\"tags\": \"hibernate\",\n\t\"user_id\" : 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/editquestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"editquestion"
+					]
+				},
+				"description": "This is for editing a question"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete question",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 23\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/questions/deletequestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"questions",
+						"deletequestion"
+					]
+				},
+				"description": "Delete question by id"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Answer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\" : 19,\n\t\"body\": \"new answer to the question with id 19\",\n\t\"user_id\" : 5,\n\t\"creation_date\" : \"CURRENT_TIMESTAMP\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/answers/postanswer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"answers",
+						"postanswer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get answers of question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\" : 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/answers/getanswersofquestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"answers",
+						"getanswersofquestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total number of answers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\" : 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/answers/totalnumberofanswers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"answers",
+						"totalnumberofanswers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Answer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 50,\n\t\"content_id\" : 20,\n\t\"body\": \"this is the third answer to the question with id 20\",\n\t\"user_id\" : 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/answers/editanswer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"answers",
+						"editanswer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Answer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 49\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/answers/deleteanswer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"answers",
+						"deleteanswer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\" : 20,\n\t\"body\": \"COMMENT COMMENT\",\n\t\"user_id\" : 3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/comments/postcomment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"comments",
+						"postcomment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the comments of a question",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\": 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/comments/getcommentsofquestion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"comments",
+						"getcommentsofquestion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all the comments for answer ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\": 44\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/comments/getcommentsofanswer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"comments",
+						"getcommentsofanswer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total number of comment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"content_id\": 44\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/comments/totalnumberofcomments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"comments",
+						"totalnumberofcomments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a comment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 46\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/comments/deletecomment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"comments",
+						"deletecomment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote Question Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\" : 1,\n\t\"user_id\": 4,\n\t\"content_id\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/votequestionup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"votequestionup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote Question Down",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\" : 2,\n\t\"user_id\": 3,\n\t\"content_id\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/votequestiondown",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"votequestiondown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote Answer Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\" : 1,\n\t\"user_id\": 5,\n\t\"content_id\": 61\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/voteanswerup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"voteanswerup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vote Answer Down",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\" : 2,\n\t\"user_id\": 4,\n\t\"content_id\": 50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/voteanswerdown",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"voteanswerdown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Question Vote Up",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\": 1,\n\t\"content_id\" : 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/totalquestionvoteup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"totalquestionvoteup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Question Vote Down",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\": 2,\n\t\"content_id\" : 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/totalquestionvotedown",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"totalquestionvotedown"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Answer Vote Up",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\": 1,\n\t\"content_id\" : 61\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/totalanswervoteup",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"totalanswervoteup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total Answer Vote Down",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"vote_type_id\": 2,\n\t\"content_id\" : 61\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/easy4lazy/vote/totalanswervotedown",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"easy4lazy",
+						"vote",
+						"totalanswervotedown"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
