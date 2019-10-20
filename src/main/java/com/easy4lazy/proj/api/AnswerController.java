@@ -68,6 +68,7 @@ public class AnswerController {
 
     @GetMapping(path="/sapm/{year}")
     public String getAnswersPerMonth(@PathVariable("year") @NotNull int year){
+
         return answerService.getAnswersPerMonth(year);
     }
 }
