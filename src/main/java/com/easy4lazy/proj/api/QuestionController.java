@@ -23,9 +23,8 @@ public class QuestionController {
         this.questionService = questionService;
     }
     @ApiOperation(value = " : post Question Successful")
-    @PostMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
-    public String postQuestion(@PathVariable("uid") @Valid @NotNull int userId,
-                               @PathVariable("token") @Valid @NotNull String token,
+    @PostMapping(path="{uid}/{ques}/{subject}/{tags}")
+    public String postQuestion(@RequestHeader("token") String token, @PathVariable("uid") @Valid @NotNull int userId,
                                @PathVariable("ques") @Valid @NotNull String question,
                                @PathVariable("subject") String subject,
                                @PathVariable("tags") String tags
@@ -83,6 +82,13 @@ public class QuestionController {
         return questionService.getTotalAnswersCount();
     }
 
+    @ApiOperation(value = " : Returns Questions Per Month ")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 100, message = "100 is the message"),
+                    @ApiResponse(code = 200, message = "Successful Returns Questions Per Month")
+            }
+    )
     @GetMapping(path="/sqpm/{year}")
     public String getQuestionsPerMonth(@PathVariable("year") @NotNull int year){
         return questionService.getQuestionsPerMonth(year);
@@ -91,6 +97,18 @@ public class QuestionController {
     @GetMapping(path="/sttvq")
     public String getTopTenVotedQuestions(){
         return questionService.getTopTenVotedQuestions();
+    }
+
+    @ApiOperation(value = " : Returns Search result")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 100, message = "100 is the message"),
+                    @ApiResponse(code = 200, message = "Successful Returns Search result list")
+            }
+    )
+    @GetMapping(path="/search/{string}")
+    public String getSearch(@PathVariable("string") @NotNull String searchString){
+        return questionService.search(searchString );
     }
 
 
