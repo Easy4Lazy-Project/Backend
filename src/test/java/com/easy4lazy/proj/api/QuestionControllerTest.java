@@ -4,23 +4,55 @@ package com.easy4lazy.proj.api;
 import com.easy4lazy.proj.service.QuestionService;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+
 import static org.mockito.Mockito.when;
 
-
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = QuestionController.class, secure = false)
 public class QuestionControllerTest {
-    @InjectMocks
-    QuestionController questionController;
+    @Autowired
+    private MockMvc mockMvc;
 
-    QuestionService questionService = mock(QuestionService.class);
+    @MockBean
+    QuestionService questionService ;
+
+
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public  void getSearchTest() throws Exception{
+        String  controllerOutput="{}";
+        when(questionService.search( Mockito.anyString())).thenReturn("{}");
+        RequestBuilder requestBuilder=  MockMvcRequestBuilders.get("localhost:/api/v1/content/q/search/C").accept(
+                MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        System.out.println( result.getResponse());
+
+        JSONAssert.assertEquals(controllerOutput, result.getResponse()
+                .getContentAsString(), false);
+
+
     }
 
     @Test

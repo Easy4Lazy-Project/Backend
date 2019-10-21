@@ -55,17 +55,17 @@ public class QuestionController {
     }
 
     @ApiOperation(value = " : delete Question By ID")
-    @DeleteMapping(path="/del/{uid}/{token}/{id}")
-    String deleteQuestion(@PathVariable("uid") @Valid @NotNull int userId, @PathVariable("token") @Valid @NotNull String token,@PathVariable("id") @Valid @NotNull int contentId){
+    @DeleteMapping(path="/del/{uid}/{id}")
+    String deleteQuestion(@PathVariable("uid") @Valid @NotNull int userId, @RequestParam("token") @Valid @NotNull String token,@PathVariable("id") @Valid @NotNull int contentId){
         return questionService.deleteQuestion(userId, token, contentId);
     }
 
     @ApiOperation(value = " : edit Question")
-    @PutMapping(path="{uid}/{token}/{ques}/{subject}/{tags}")
+    @PutMapping(path="{uid}/{ques}/{subject}/{tags}")
     public String editQuestion(@PathVariable("uid") @Valid @NotNull int userId,
-                               @PathVariable("token") @Valid @NotNull String token,
                                @PathVariable("ques") @Valid @NotNull String question,
                                @PathVariable("subject") String subject,
+                               @RequestParam("token")@Valid @NotNull String token,
                                @PathVariable("tags") String tags){
         return questionService.editQuestion(userId, token, question, subject, tags);
     }

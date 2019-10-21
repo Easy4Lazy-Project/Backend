@@ -18,8 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -32,11 +31,11 @@ public class AnswerControllerTest {
    private AnswerService answerService;
         @Test
     public void getAnswersPerMonthTest() throws Exception{
-          String  controllerOutput="2019";
+          String  controllerOutput="{}";
 
-            when(answerService.getAnswersPerMonth( Mockito.anyInt())).thenReturn("2019");
+            when(answerService.getAnswersPerMonth( Mockito.anyInt())).thenReturn("{}");
 
-            RequestBuilder requestBuilder=  MockMvcRequestBuilders.get("localhost:/api/v1/post/a/sapm/2019").accept(
+            RequestBuilder requestBuilder=  MockMvcRequestBuilders.get("localhost:/api/v1/post/a/sapm/{}").accept(
                     MediaType.APPLICATION_JSON);
 
             MvcResult result = mockMvc.perform(requestBuilder).andReturn();

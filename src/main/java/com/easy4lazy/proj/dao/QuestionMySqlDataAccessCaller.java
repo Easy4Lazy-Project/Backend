@@ -245,7 +245,7 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
                 "FROM content c INNER JOIN user u on c.user_id = u.id " +
                 "LEFT JOIN likes_count l ON c.id = l.content_id " +
                 "LEFT JOIN dislikes_count d ON c.id = d.content_id " +
-                "WHERE c.body LIKE ? OR c.subject LIKE ? " +
+                "WHERE c.contenttype_id=1 && c.body LIKE ? OR c.subject LIKE ? " +
                 "ORDER BY c.creationDate DESC ";// +
         // "LIMIT 3";
        // System.err.println(sql+"   @@@@@   "+searchString+"   @@@@@    "+searchTokenizer);
