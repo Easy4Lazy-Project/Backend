@@ -46,4 +46,8 @@ public class QuestionService {
     public String getTopTenVotedQuestions(){
         return questionDao.getTopTenVotedQuestions();
     }
+
+    public String search(String searchStr){
+        return questionDao.search(searchStr);
+    }
 }

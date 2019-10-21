@@ -8,8 +8,8 @@ plugins {
 
 group = 'com.easy4lazy'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '12'
-targetCompatibility = '12'
+sourceCompatibility = '11'
+targetCompatibility = '11'
 
 configurations {
 	developmentOnly

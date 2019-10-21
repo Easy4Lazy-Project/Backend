@@ -77,6 +77,16 @@ public interface QuestionDao {
      */
     String getTopTenVotedQuestions();
 
+    /**
+     *
+     * @param searchString
+     * @return [{
+     *          subject, body, createdDate, id, name of user, tags, answerCount, like, dislike,
+     *           myvote e.g "like", "dislike" or ""
+     *      }]
+     */
+    String search(String searchString);
+
 
 
 

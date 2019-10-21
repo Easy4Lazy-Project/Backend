@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Purpose: class that interact with the mysql database
@@ -219,7 +219,7 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
                 "FROM content " +
                 "WHERE YEAR(creationDate) = ? AND contenttype_id=1 " +
                 "GROUP BY month";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, new Object[]{year});
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, year);
         return new Gson().toJson(result);   //convert the list to json
     }
 
@@ -234,5 +234,30 @@ public class QuestionMySqlDataAccessCaller implements QuestionDao {
                 "LIMIT 10";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(sql);
         return new Gson().toJson(result);   //convert the list to json
+    }
+
+    @Override
+    public String search(String searchString) {
+        //tokenizer searchString: remove stop words
+        String searchTokenizer = filterSearchString(searchString);
+        final String sql = "SELECT c.id, c.subject, c.body,c.creationDate, c.tags, c.user_id, u.name, " +
+                "l.count as likes, d.count as dislike " +
+                "FROM content c INNER JOIN user u on c.user_id = u.id " +
+                "LEFT JOIN likes_count l ON c.id = l.content_id " +
+                "LEFT JOIN dislikes_count d ON c.id = d.content_id " +
+                "WHERE c.body LIKE ? OR c.subject LIKE ? " +
+                "ORDER BY c.creationDate DESC ";// +
+        // "LIMIT 3";
+       // System.err.println(sql+"   @@@@@   "+searchString+"   @@@@@    "+searchTokenizer);
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(sql, searchTokenizer, searchTokenizer);
+        //return result.toString();
+        return new Gson().toJson(result);//convert the list to json
+    }
+
+    private String filterSearchString(String sch){
+        List<String> stopWords = List.of("of","the","we","are",".");
+        if(sch != null)
+            return "%"+Stream.of(sch.split(" ")).filter(w -> !stopWords.contains(w)).collect(Collectors.joining("%"))+"%";
+        return "";
     }
 }
